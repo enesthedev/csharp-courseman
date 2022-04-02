@@ -9,8 +9,8 @@ namespace Courseman.Common.Interfaces
 		public Academician Academician { get; set; }
 		public List<Student> Students { get; set; }
 
-		Course addStudent(Student student);
-		Course removeStudent(Student student);
+		public Course AddStudent(Student student);
+		public Course RemoveStudent(Student student);
 	}
 }
 

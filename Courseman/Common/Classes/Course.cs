@@ -33,7 +33,7 @@ namespace Courseman.Common.Classes
             set { _students = value; }
         }
 
-        public Course addStudent(Student student)
+        public Course AddStudent(Student student)
         {
             if (!Students.Contains(student)) {
                 Students.Append(student);
@@ -41,7 +41,7 @@ namespace Courseman.Common.Classes
             return this;
         }
 
-        public Course removeStudent(Student student)
+        public Course RemoveStudent(Student student)
         {
             if (Students.Contains(student)) {
                 Students.Remove(student);
