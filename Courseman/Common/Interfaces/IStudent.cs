@@ -5,10 +5,10 @@ namespace Courseman.Common.Interfaces
 {
 	public interface IStudent : IPerson
 	{
-		public string Class { get; set; }
-
 		public List<Course> Courses { get; set; }
 		public List<Grade> Grades { get; set; }
+
+		public Student AddCourse(Course course);
 	}
 }
 

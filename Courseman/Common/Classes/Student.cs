@@ -5,24 +5,12 @@ namespace Courseman.Common.Classes
 {
 	public class Student: IStudent
 	{
-		public Student(string Name, string Class, int Age, long IdentityNumber)
+		public Student(string Name, int Age, long IdentityNumber)
 		{
             this.Name = Name;
-            this.Class = Class;
             this.Age = Age;
             this.IdentityNumber = IdentityNumber;
 		}
-
-        private string _class = null!;
-        public string Class {
-            get => _class;
-            set {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                _class = value;
-            }
-        }
 
         private string _name = null!;
         public string Name {
