@@ -6,7 +6,7 @@ namespace Courseman.Common.Interfaces
 		public string Name { get; set; }
 
 		public int Age { get; set; }
-		public int IdentityNumber { get; set; }
+		public long IdentityNumber { get; set; }
 	}
 }
 

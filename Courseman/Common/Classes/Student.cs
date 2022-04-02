@@ -5,7 +5,7 @@ namespace Courseman.Common.Classes
 {
 	public class Student: IStudent
 	{
-		public Student(string Name, string Class, int Age, int IdentityNumber)
+		public Student(string Name, string Class, int Age, long IdentityNumber)
 		{
             this.Name = Name;
             this.Class = Class;
@@ -46,8 +46,8 @@ namespace Courseman.Common.Classes
             set { _age = value; }
         }
 
-        private int _identityNumber { get; set; }
-        public int IdentityNumber {
+        private long _identityNumber { get; set; }
+        public long IdentityNumber {
             get { return _identityNumber; }
             set { _identityNumber = value; }
         }
