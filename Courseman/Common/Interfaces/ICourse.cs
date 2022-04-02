@@ -11,6 +11,7 @@ namespace Courseman.Common.Interfaces
 		public ArraySegment<Student> Students { get; set; }
 
 		Course addStudent(Student student);
+		Course removeStudent(Student student);
 	}
 }
 
