@@ -52,7 +52,7 @@ namespace Courseman.Common.Classes
                         { "IdentityNumber", student.IdentityNumber.ToString() }
                     });
                 #endif
-                Students.Append(student);
+                Students.Add(student);
             }
             return this;
         }
