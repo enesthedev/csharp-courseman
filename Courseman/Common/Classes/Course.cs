@@ -6,6 +6,12 @@ namespace Courseman.Common.Classes
 {
     public class Course : ICourse
     {
+        public Course(string Name)
+        {
+            this.Name = Name;
+            this.Students = new List<Student>();
+        }
+
         private string _name { get; set; }
         public string Name
         {
@@ -25,12 +31,6 @@ namespace Courseman.Common.Classes
         {
             get { return _students; }
             set { _students = value; }
-        }
-
-        public Course(string Name)
-        {
-            this.Name = Name;
-            this.Students = new List<Student>();
         }
 
         public Course addStudent(Student student)

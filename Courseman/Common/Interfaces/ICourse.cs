@@ -1,5 +1,4 @@
-﻿using System;
-using Courseman.Common.Classes;
+﻿using Courseman.Common.Classes;
 
 namespace Courseman.Common.Interfaces
 {
@@ -8,7 +7,7 @@ namespace Courseman.Common.Interfaces
 		public string Name { get; set; }
 
 		public Academician Academician { get; set; }
-		public ArraySegment<Student> Students { get; set; }
+		public List<Student> Students { get; set; }
 
 		Course addStudent(Student student);
 		Course removeStudent(Student student);
