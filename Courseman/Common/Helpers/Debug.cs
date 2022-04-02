@@ -5,7 +5,6 @@ namespace Courseman.Common.Helpers
 	{
 		public static void WriteLine(string header, Dictionary<String, String> debugItems)
         {
-			Console.WriteLine("\n");
 			Console.WriteLine(header);
 
 			foreach (KeyValuePair<string, string> kvp in debugItems) {
