@@ -10,29 +10,36 @@ namespace Courseman.Common.Classes
         public Course(string Name)
         {
             this.Name = Name;
-            this.Students = new List<Student>();
         }
 
-        private string _name;
+        private string _name = null!;
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                _name = value;
+            }
         }
 
-        private Academician _academician;
+        private Academician _academician = null!;
         public Academician Academician
         {
-            get { return _academician; }
-            set { _academician = value; }
+            get => _academician;
+            set {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                _academician = value;
+            }
         }
 
-        private List<Student> _students;
-        public List<Student> Students
-        {
-            get { return _students; }
-            set { _students = value; }
-        }
+        public List<Student> Students {
+            get;
+            set;
+        } = new List<Student>();
 
         public Course AddStudent(Student student)
         {

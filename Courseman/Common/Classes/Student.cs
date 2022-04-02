@@ -11,46 +11,53 @@ namespace Courseman.Common.Classes
             this.Class = Class;
             this.Age = Age;
             this.IdentityNumber = IdentityNumber;
-
-            this.Courses = new List<Course>();
-            this.Grades = new List<Grade>();
 		}
 
-        private string _class;
+        private string _class = null!;
         public string Class {
-            get { return _class; }
-            set { _class = value; }
+            get => _class;
+            set {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                _class = value;
+            }
         }
 
-        private List<Course> _courses;
-        public List<Course> Courses {
-            get { return _courses; }
-            set { _courses = value; }
-        }
-
-        private List<Grade> _grades;
-        public List<Grade> Grades {
-            get { return _grades; }
-            set { _grades = value;  }
-        }
-
-        private string _name;
+        private string _name = null!;
         public string Name {
-            get { return _name; }
-            set { _name = value; }
-        }
+            get => _name;
+            set {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
 
-        private int _age;
-        public int Age {
-            get { return _age; }
-            set { _age = value; }
+                _name = value;
+            }
         }
 
         private long _identityNumber;
         public long IdentityNumber {
-            get { return _identityNumber; }
-            set { _identityNumber = value; }
+            get => _identityNumber;
+            set {
+                if (value >= 100000000000 && value <= 10000000000)
+                    throw new InvalidDataException("IdentityNumber cant biger/less then length of 11");
+
+                _identityNumber = value;
+            }
         }
+
+        public int Age { get; set; }
+
+        public List<Course> Courses {
+            get;
+            set;
+        } = new List<Course>();
+
+        public List<Grade> Grades {
+            get;
+            set;
+        } = new List<Grade>();
+
     }
 }
 
