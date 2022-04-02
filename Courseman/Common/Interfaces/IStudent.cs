@@ -1,12 +1,14 @@
 ﻿using System;
+using Courseman.Common.Classes;
+
 namespace Courseman.Common.Interfaces
 {
 	public interface IStudent : IPerson
 	{
 		public string Class { get; set; }
 
-		public Array Courses { get; set; }
-		public Array Grades { get; set; }
+		public List<Course> Courses { get; set; }
+		public List<Grade> Grades { get; set; }
 	}
 }
 
