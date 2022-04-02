@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Courseman.Common.Helpers;
+﻿using Courseman.Common.Helpers;
 using Courseman.Common.Interfaces;
 
 namespace Courseman.Common.Classes
@@ -45,9 +43,8 @@ namespace Courseman.Common.Classes
         {
             if (!Students.Contains(student)) {
                 #if DEBUG
-                    Debug.WriteLine("Course.cs", new Dictionary<string, string> {
+                    Debug.WriteLine("New Student:", new Dictionary<string, string> {
                         { "Name", student.Name },
-                        { "Class", student.Class },
                         { "Age", student.Age.ToString() },
                         { "IdentityNumber", student.IdentityNumber.ToString() }
                     });
@@ -60,6 +57,13 @@ namespace Courseman.Common.Classes
         public Course RemoveStudent(Student student)
         {
             if (Students.Contains(student)) {
+                #if DEBUG
+                    Debug.WriteLine("Remove Student:", new Dictionary<string, string> {
+                        { "Name", student.Name },
+                        { "Age", student.Age.ToString() },
+                        { "IdentityNumber", student.IdentityNumber.ToString() }
+                    });
+                #endif
                 Students.Remove(student);
             }
             return this;
