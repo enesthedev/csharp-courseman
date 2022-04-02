@@ -13,21 +13,21 @@ namespace Courseman.Common.Classes
             this.Students = new List<Student>();
         }
 
-        private string _name { get; set; }
+        private string _name;
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
-        private Academician _academician { get; set; }
+        private Academician _academician;
         public Academician Academician
         {
             get { return _academician; }
             set { _academician = value; }
         }
 
-        private List<Student> _students { get; set; }
+        private List<Student> _students;
         public List<Student> Students
         {
             get { return _students; }
