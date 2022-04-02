@@ -14,11 +14,13 @@
     <None Remove="Common\" />
     <None Remove="Common\Classes\" />
     <None Remove="Common\Interfaces\" />
+    <None Remove="Common\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Common\Classes\" />
     <Folder Include="Common\Interfaces\" />
+    <Folder Include="Common\Helpers\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
