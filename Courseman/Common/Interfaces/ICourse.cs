@@ -9,6 +9,8 @@ namespace Courseman.Common.Interfaces
 
 		public Academician Academician { get; set; }
 		public ArraySegment<Student> Students { get; set; }
+
+		Course addStudent(Student student);
 	}
 }
 
