@@ -34,7 +34,7 @@ namespace Courseman.Common.Classes
             }
         }
 
-        public int Age { get; set; }
+        public int Age { get; set; } = 0;
 
         public List<Course> Courses {
             get;
