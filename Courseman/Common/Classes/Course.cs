@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Courseman.Common.Helpers;
 using Courseman.Common.Interfaces;
 
 namespace Courseman.Common.Classes
@@ -36,6 +37,14 @@ namespace Courseman.Common.Classes
         public Course AddStudent(Student student)
         {
             if (!Students.Contains(student)) {
+                #if DEBUG
+                    Debug.WriteLine("Course.cs", new Dictionary<string, string> {
+                        { "Name", student.Name },
+                        { "Class", student.Class },
+                        { "Age", student.Age.ToString() },
+                        { "IdentityNumber", student.IdentityNumber.ToString() }
+                    });
+                #endif
                 Students.Append(student);
             }
             return this;
