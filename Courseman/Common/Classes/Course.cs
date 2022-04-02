@@ -71,7 +71,7 @@ namespace Courseman.Common.Classes
 
         public Course AttachAcademician(Academician academician)
         {
-            if (this.Academician != null && academician != null) {
+            if (this.Academician == null && academician != null) {
                 this.Academician = academician;
 
                 if (!academician.Courses.Contains(this))
