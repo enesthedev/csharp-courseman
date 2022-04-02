@@ -11,6 +11,8 @@ namespace Courseman.Common.Interfaces
 
 		public Course AddStudent(Student student);
 		public Course RemoveStudent(Student student);
+
+		public Course AttachAcademician(Academician academician);
 	}
 }
 

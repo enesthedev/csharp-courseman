@@ -68,6 +68,17 @@ namespace Courseman.Common.Classes
             }
             return this;
         }
+
+        public Course AttachAcademician(Academician academician)
+        {
+            if (this.Academician != null && academician != null) {
+                this.Academician = academician;
+
+                if (!academician.Courses.Contains(this))
+                    academician.AddCourse(this);
+            }
+            return this;
+        }
     }
 }
 
