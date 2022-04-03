@@ -5,12 +5,22 @@ namespace Courseman
 {
 	public class Application
 	{
+		/**
+		 * Uygulama sınıfı
+		 * 
+		 * Bu sınıfı tanımlama amacım tüm herşeyin Program.cs içerisinde olmasını istemememdi. Program.cs'i bir başlatıcı olarak düşünerek
+		 * static Run metoduna sahip olan bir uygulama sınıfı oluşturdum. Bu Run metodu içerisinde sınıf tanımlamalarını ve uygulamanın genel yapısını
+		 * barındırıyor.
+		 * 
+		 * Aynı zamanda bu tanımlama sayesinde konsol aplikasyonlarında yaşanan hatalı girdilerde uygulamayı dinamik şekilde yeniden başlatabiliyorum.
+		 * Yeniden başlatma yanlış algılanmasın. Aynı process içerisinde tekrardan tanımlamaları yapıyorum.
+		 */
 		public static void Run()
         {
 			Console.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.");
 			Console.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
 
-			List<dynamic> courses = new List<dynamic>() {
+			List<dynamic> courses = new List<dynamic> {
 				new Course("Java Programlama"),
 				new Course("C# Programlama")
 			};
