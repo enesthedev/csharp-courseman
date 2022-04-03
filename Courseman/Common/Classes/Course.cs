@@ -5,9 +5,13 @@ namespace Courseman.Common.Classes
 {
     public class Course : ICourse
     {
-        public Course(string Name)
+        public Course(string Name, int midtermRatio = 40, int finalRatio = 60)
         {
             this.Name = Name;
+
+            // Opsiyonel elemanlar
+            this.MidtermRatio = midtermRatio;
+            this.FinalRatio = finalRatio;
         }
 
         private string _name = null!;
@@ -21,6 +25,9 @@ namespace Courseman.Common.Classes
                 _name = value;
             }
         }
+
+        public int MidtermRatio { get; set; }
+        public int FinalRatio { get; set; }
 
         private Academician _academician = null!;
         public Academician Academician
