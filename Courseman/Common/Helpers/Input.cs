@@ -2,10 +2,14 @@
 {
 	public class Input
 	{
-		public static int ReadOptions(List<dynamic> listOfClasses)
+		public static int ReadOptions(List<dynamic> listOfClasses, bool minusOneEnabled = false)
 		{
 			try {
 				int selectedOption = Convert.ToInt32(Console.ReadLine());
+
+				if (minusOneEnabled && selectedOption == -1)
+					return -1;
+
 				dynamic selectedClass = listOfClasses.ElementAt(selectedOption);
 
 				if (!(selectedClass != null))
