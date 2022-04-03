@@ -26,8 +26,9 @@ namespace Courseman
 				new Student("Emin", 21, 48561842566)
 		};
 
-		public static void Run()
+		public static int Run()
         {
+			Console.Clear();
 			Console.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.");
 			Console.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
 
@@ -47,7 +48,9 @@ namespace Courseman
 				if (string.IsNullOrEmpty(courseName)) {
 					Console.Clear();
 					Console.WriteLine("Girilen kurs ismi boş olamaz. (Örnek isim: C# Uygulamaları)");
-					return;
+					Thread.Sleep(1500);
+
+					return Run();
 				}
 
 				Console.Clear();
@@ -84,13 +87,15 @@ namespace Courseman
 
 			if (selectedStudentIndex == -1) {
 
+
+
 				Console.WriteLine("Öğrenci oluşturma sihirbazına hoşgeldiniz\nLütfen yeni öğrenci adını giriniz:");
 				string? studentName = Console.ReadLine();
 
 				if (string.IsNullOrEmpty(studentName)) {
 					Console.Clear();
 					Console.WriteLine("Girilen öğrenci ismi boş olamaz. (Örnek isim: Enes Bayraktar)");
-					return;
+					return Run();
 				}
 
 				Console.Clear();
@@ -114,6 +119,8 @@ namespace Courseman
 			}
 
 			Student selectedStudent = Students.ElementAt(selectedStudentIndex);
+
+			return 1;
 		}
 	}
 }
