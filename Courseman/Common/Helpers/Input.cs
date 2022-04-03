@@ -19,12 +19,11 @@
 
 				return selectedOption;
 
-			} catch (ArgumentOutOfRangeException) {
-
-				Console.WriteLine("\n");
+			} catch (Exception) {
+				Console.Clear();
 				Console.WriteLine("Girdiğiniz değer mevcut değil.\nLütfen yeni bir değer girin:");
 
-				return ReadOptions(listOfClasses);
+				return ReadOptions(listOfClasses, minusOneEnabled);
 			}
 		}
 	}
