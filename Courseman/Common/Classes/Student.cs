@@ -41,11 +41,6 @@ namespace Courseman.Common.Classes
             set;
         } = new List<Course>();
 
-        public List<Grade> Grades {
-            get;
-            set;
-        } = new List<Grade>();
-
         public Student AddCourse(Course course)
         {
             if (!Courses.Contains(course)) {
