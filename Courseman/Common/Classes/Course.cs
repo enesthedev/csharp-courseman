@@ -1,4 +1,5 @@
 ﻿using Courseman.Common.Interfaces;
+using 
 
 #if DEBUG
 using Courseman.Common.Helpers;
@@ -8,7 +9,10 @@ namespace Courseman.Common.Classes
 {
     public class Course : ICourse
     {
-        public Course(string Name, int midtermRatio = 40, int finalRatio = 60)
+        public const int MIDTERM_RATIO = 20;
+        public const int FINAL_RATIO = 60;
+
+        public Course(string Name, int midtermRatio = Course.MIDTERM_RATIO, int finalRatio = Course.FINAL_RATIO)
         {
             this.Name = Name;
 
