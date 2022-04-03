@@ -15,21 +15,22 @@ namespace Courseman
 		 * Aynı zamanda bu tanımlama sayesinde konsol aplikasyonlarında yaşanan hatalı girdilerde uygulamayı dinamik şekilde yeniden başlatabiliyorum.
 		 * Yeniden başlatma yanlış algılanmasın. Aynı process içerisinde tekrardan tanımlamaları yapıyorum.
 		 */
+
+		static List<dynamic> Courses = new List<dynamic> {
+			new Course("Java Programlama"),
+			new Course("C# Programlama")
+		};
+
 		public static void Run()
         {
 			Console.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.");
 			Console.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
 
-			List<dynamic> courses = new List<dynamic> {
-				new Course("Java Programlama"),
-				new Course("C# Programlama")
-			};
-
-			for (int i = 0; i < courses.ToArray().Length; i++) {
-				Console.WriteLine("{0}: {1}", i, courses.ElementAt(i).Name);
+			for (int i = 0; i < Courses.ToArray().Length; i++) {
+				Console.WriteLine("{0}: {1}", i, Courses.ElementAt(i).Name);
 			}
 
-			int selectedCourseIndex = Input.ReadOptions(courses, true);
+			int selectedCourseIndex = Input.ReadOptions(Courses, true);
 
 			Console.Clear();
 
@@ -56,15 +57,15 @@ namespace Courseman
 
 				Console.Clear();
 
-				courses.Add(new Course(courseName, courseMidtermRatio, courseFinalRatio));
+				Courses.Add(new Course(courseName, courseMidtermRatio, courseFinalRatio));
 				Console.WriteLine("{0} adlı kurs başarıyla eklendi", courseName);
 
-				selectedCourseIndex = courses.ToArray().Length - 1;
+				selectedCourseIndex = Courses.ToArray().Length - 1;
 
 				Console.Clear();
 			}
 
-			Course selectedCourse = courses.ElementAt(selectedCourseIndex);
+			Course selectedCourse = Courses.ElementAt(selectedCourseIndex);
 
 			List<dynamic> students = new List<dynamic>() {
 				new Student("Enes", 22, 63673031350),
