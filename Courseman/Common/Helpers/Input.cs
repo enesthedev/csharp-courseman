@@ -19,11 +19,12 @@
 
 				return selectedOption;
 
-			} catch (Exception) {
-				Console.Clear();
-				Console.WriteLine("Girdiğiniz değer mevcut değil.\nLütfen yeni bir değer girin:");
-
-				return ReadOptions(listOfClasses, minusOneEnabled);
+			} catch (Exception ex) {
+				if (ex is ArgumentOutOfRangeException || ex is FormatException) {
+					Console.WriteLine("Girdiğiniz değer mevcut değil.\nLütfen yeni bir değer girin:");
+					return ReadOptions(listOfClasses, minusOneEnabled);
+				}
+				throw;
 			}
 		}
 	}
