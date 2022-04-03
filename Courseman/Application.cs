@@ -21,6 +21,11 @@ namespace Courseman
 			new Course("C# Programlama")
 		};
 
+		static List<dynamic> Students = new List<dynamic>() {
+				new Student("Enes", 22, 63673031350),
+				new Student("Emin", 21, 48561842566)
+		};
+
 		public static void Run()
         {
 			Console.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.");
@@ -67,18 +72,13 @@ namespace Courseman
 
 			Course selectedCourse = Courses.ElementAt(selectedCourseIndex);
 
-			List<dynamic> students = new List<dynamic>() {
-				new Student("Enes", 22, 63673031350),
-				new Student("Emin", 21, 48561842566)
-			};
-
 			Console.WriteLine("{0} kursu için lütfen alttaki öğrencilerden birini seçiniz:\nYeni bir öğrenci oluşturmak istiyorsanız -1 yazabilirsiniz.", selectedCourse.Name);
 
-			for (int i = 0; i < students.ToArray().Length; i++) {
-				Console.WriteLine("{0}: {1}", i, students.ElementAt(i).Name);
+			for (int i = 0; i < Students.ToArray().Length; i++) {
+				Console.WriteLine("{0}: {1}", i, Students.ElementAt(i).Name);
 			}
 
-			int selectedStudentIndex = Input.ReadOptions(students, true);
+			int selectedStudentIndex = Input.ReadOptions(Students, true);
 
 			Console.Clear();
 
@@ -105,15 +105,15 @@ namespace Courseman
 
 				Console.Clear();
 
-				students.Add(new Student(studentName, studentAge, studentIdentityNumber));
+				Students.Add(new Student(studentName, studentAge, studentIdentityNumber));
 				Console.WriteLine("{0} adlı öğrenci başarıyla eklendi", studentName);
 
-				selectedStudentIndex = students.ToArray().Length - 1;
+				selectedStudentIndex = Students.ToArray().Length - 1;
 
 				Console.Clear();
 			}
 
-			Student selectedStudent = students.ElementAt(selectedStudentIndex);
+			Student selectedStudent = Students.ElementAt(selectedStudentIndex);
 		}
 	}
 }
