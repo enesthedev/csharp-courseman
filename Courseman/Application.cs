@@ -28,100 +28,87 @@ namespace Courseman
 
 		public static int Run()
         {
-			Console.Clear();
-			Console.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.");
-			Console.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
+			Application.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.", true);
+			Application.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
 
 			for (int i = 0; i < Courses.ToArray().Length; i++) {
-				Console.WriteLine("{0}: {1}", i, Courses.ElementAt(i).Name);
+				Application.WriteLine("{0}: {1}", false, i, Courses.ElementAt(i).Name);
 			}
 
 			int selectedCourseIndex = Input.ReadOptions(Courses, true);
 
-			Console.Clear();
-
 			if (selectedCourseIndex == -1) {
 
-				Console.WriteLine("Kurs oluşturma sihirbazına hoşgeldiniz\nLütfen kurs adını giriniz:");
+				Application.WriteLine("Kurs oluşturma sihirbazına hoşgeldiniz\nLütfen kurs adını giriniz:", true);
 				string? courseName = Console.ReadLine();
 
 				if (string.IsNullOrEmpty(courseName)) {
-					Console.Clear();
-					Console.WriteLine("Girilen kurs ismi boş olamaz. (Örnek isim: C# Uygulamaları)");
+					Application.WriteLine("Girilen kurs ismi boş olamaz. (Örnek isim: C# Uygulamaları)", true);
 					Thread.Sleep(1500);
 
 					return Run();
 				}
 
-				Console.Clear();
-
-				Console.WriteLine("{0} adlı kursun vizelerinin yüzde ne kadar etkili olacağını giriniz (Varsayılan değer 20):", courseName);
+				Application.WriteLine("{0} adlı kursun vizelerinin yüzde ne kadar etkili olacağını giriniz (Varsayılan değer 20):", true, courseName);
 				int courseMidtermRatio = Convert.ToInt32(Console.ReadLine());
 
-				Console.Clear();
-
-				Console.WriteLine("{0} adlı kursun final sınavının yüzde ne kadar etkili olacağını giriniz (Varsayılan değer 60):", courseName);
+				Application.WriteLine("{0} adlı kursun final sınavının yüzde ne kadar etkili olacağını giriniz (Varsayılan değer 60):", true, courseName);
 				int courseFinalRatio = Convert.ToInt32(Console.ReadLine());
 
-				Console.Clear();
-
 				Courses.Add(new Course(courseName, courseMidtermRatio, courseFinalRatio));
-				Console.WriteLine("{0} adlı kurs başarıyla eklendi", courseName);
+				Application.WriteLine("{0} adlı kurs başarıyla eklendi", true, courseName);
 
 				selectedCourseIndex = Courses.ToArray().Length - 1;
-
-				Console.Clear();
 			}
 
 			Course selectedCourse = Courses.ElementAt(selectedCourseIndex);
 
-			Console.WriteLine("{0} kursu için lütfen alttaki öğrencilerden birini seçiniz:\nYeni bir öğrenci oluşturmak istiyorsanız -1 yazabilirsiniz.", selectedCourse.Name);
+			Application.WriteLine("{0} kursu için lütfen alttaki öğrencilerden birini seçiniz:\nYeni bir öğrenci oluşturmak istiyorsanız -1 yazabilirsiniz.", true, selectedCourse.Name);
 
 			for (int i = 0; i < Students.ToArray().Length; i++) {
-				Console.WriteLine("{0}: {1}", i, Students.ElementAt(i).Name);
+				Application.WriteLine("{0}: {1}", false, i, Students.ElementAt(i).Name);
 			}
 
 			int selectedStudentIndex = Input.ReadOptions(Students, true);
 
-			Console.Clear();
-
 			if (selectedStudentIndex == -1) {
 
-
-
-				Console.WriteLine("Öğrenci oluşturma sihirbazına hoşgeldiniz\nLütfen yeni öğrenci adını giriniz:");
+				Application.WriteLine("Öğrenci oluşturma sihirbazına hoşgeldiniz\nLütfen yeni öğrenci adını giriniz:", true);
 				string? studentName = Console.ReadLine();
 
 				if (string.IsNullOrEmpty(studentName)) {
-					Console.Clear();
-					Console.WriteLine("Girilen öğrenci ismi boş olamaz. (Örnek isim: Enes Bayraktar)");
+					Application.WriteLine("Girilen öğrenci ismi boş olamaz. (Örnek isim: Enes Bayraktar)", true);
 					return Run();
 				}
 
-				Console.Clear();
-
-				Console.WriteLine("{0} adlı öğrencinin yaşını giriniz:", studentName);
+				Application.WriteLine("{0} adlı öğrencinin yaşını giriniz:", true, studentName);
 				int studentAge = Convert.ToInt32(Console.ReadLine());
 
-				Console.Clear();
-
-				Console.WriteLine("{0} adlı öğrencinin kimlik numarasını giriniz:", studentName);
+				Application.WriteLine("{0} adlı öğrencinin kimlik numarasını giriniz:", false, studentName);
 				long studentIdentityNumber = Convert.ToInt64(Console.ReadLine());
 
-				Console.Clear();
 
 				Students.Add(new Student(studentName, studentAge, studentIdentityNumber));
-				Console.WriteLine("{0} adlı öğrenci başarıyla eklendi", studentName);
+				Application.WriteLine("{0} adlı öğrenci başarıyla eklendi", true, studentName);
 
 				selectedStudentIndex = Students.ToArray().Length - 1;
 
-				Console.Clear();
+				Application.WriteLine(null, true);
 			}
 
 			Student selectedStudent = Students.ElementAt(selectedStudentIndex);
 
 			return 1;
 		}
+
+		public static void WriteLine(string message, bool clear = false, params dynamic[] entitys)
+        {
+			if (clear)
+				Console.Clear();
+
+			if (!string.IsNullOrEmpty(message))
+				Console.WriteLine(message, entitys);
+        }
 	}
 }
 
