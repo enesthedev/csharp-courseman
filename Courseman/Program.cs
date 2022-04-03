@@ -40,8 +40,11 @@ if (selectedCourseIndex == -1) {
 	Console.WriteLine("Kurs oluşturma sihirbazına hoşgeldiniz\nLütfen kurs adını giriniz:");
 	string? courseName = Console.ReadLine();
 
-	if (courseName == null)
-		throw new ArgumentNullException(nameof(courseName));
+	if (string.IsNullOrEmpty(courseName)) {
+		Console.Clear();
+		Console.WriteLine("Girilen kurs ismi boş olamaz. (Örnek isim: C# Uygulamaları)");
+		return;
+	}
 
 	Console.Clear();
 
@@ -85,8 +88,11 @@ if (selectedStudentIndex == -1) {
 	Console.WriteLine("Öğrenci oluşturma sihirbazına hoşgeldiniz\nLütfen yeni öğrenci adını giriniz:");
 	string? studentName = Console.ReadLine();
 
-	if (studentName == null)
-		throw new ArgumentNullException(nameof(studentName));
+	if (string.IsNullOrEmpty(studentName)) {
+		Console.Clear();
+		Console.WriteLine("Girilen öğrenci ismi boş olamaz. (Örnek isim: Enes Bayraktar)");
+		return;
+	}
 
 	Console.Clear();
 
