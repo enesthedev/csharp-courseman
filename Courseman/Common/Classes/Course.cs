@@ -1,5 +1,8 @@
-﻿using Courseman.Common.Helpers;
-using Courseman.Common.Interfaces;
+﻿using Courseman.Common.Interfaces;
+
+#if DEBUG
+using Courseman.Common.Helpers;
+#endif
 
 namespace Courseman.Common.Classes
 {
@@ -19,7 +22,7 @@ namespace Courseman.Common.Classes
         {
             get => _name;
             set {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                     throw new ArgumentNullException(nameof(value));
 
                 _name = value;
