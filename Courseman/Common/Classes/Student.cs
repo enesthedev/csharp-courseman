@@ -29,7 +29,7 @@ namespace Courseman.Common.Classes
         public long IdentityNumber {
             get => _identityNumber;
             set {
-                if (value >= 100000000000 || value <= 10000000000)
+                if (value >= 100000000000 || value <= 9999999999)
                     throw new InvalidDataException("IdentityNumber cant biger/less then length of 11");
 
                 _identityNumber = value;
