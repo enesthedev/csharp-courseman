@@ -1,6 +1,4 @@
-﻿using Courseman;
-
-/**
+﻿/**
  * .NET 6
  *
  * Bu proje .NET 6 kullanılarak oluşturulmuştur. Yeni .NET 6 şablon bilgileri için alttaki adresi inceleyin
@@ -16,6 +14,7 @@
  * Sınıf elemanlarının nasıl null safe yazılabileceği hakkında bilgi https://stackoverflow.com/a/60702710/18683822
  * Null safe hata mesajları için kullandığım yardımcı fonksiyon https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/nameof
  * Metodlara opsiyonal argüman tanımlama hakkında bilgi https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments
+ * Konsol uygulamaları için bir hata durumunda programı yeniden başlatmak amacıyla döngü metodu tanımlama https://stackoverflow.com/questions/5706497/how-restart-the-console-app
  */
 
-Application.Run();
+Courseman.Application.Run();
