@@ -33,8 +33,13 @@ namespace Courseman
 		};
 
 		static List<dynamic> Students = new List<dynamic>() {
-				new Student("Enes", 22, 63673031350),
-				new Student("Emin", 21, 48561842566)
+			new Student("Enes", 22, 63673031350),
+			new Student("Emin", 21, 48561842566)
+		};
+
+		static List<dynamic> Academicians = new List<dynamic>() {
+			new Academician("Tugba"),
+			new Academician("Ömer"),
 		};
 
 		/**
@@ -45,6 +50,18 @@ namespace Courseman
         {
 			Application.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.", true);
 			Application.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
+
+			/**
+			 * Akademisyenleri Kurslarla eşleştirme
+			 - Bu döngüde built-in girilmiş akademisyenleri kurslarla eşleştiriyorum, kriter olarak akademisyenin hiç bir kursa atanmamış sahip olmaması gerekiyor.
+			 - aplikasyon yeniden başladığında hata yaşanmasını bu şekilde önlemiş oluyorum.
+			 */
+			for (int i = 0; i < Academicians.ToArray().Length; i++) {
+				Academician academician = Academicians.ElementAt(i);
+				if (academician.Courses.ToArray().Length == 0) {
+					Academicians.ElementAt(i).AddCourse(Courses.ElementAt(i));
+				}
+            }
 
 			for (int i = 0; i < Courses.ToArray().Length; i++) {
 				Application.WriteLine("{0}: {1}", false, i, Courses.ElementAt(i).Name);
