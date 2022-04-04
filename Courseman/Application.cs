@@ -16,8 +16,17 @@ namespace Courseman
 		 * Yeniden başlatma yanlış algılanmasın. Aynı process içerisinde tekrardan tanımlamaları yapıyorum.
 		 */
 
+		/**
+		 * Kimlik numarası
+		 - Bu değer kimlik numarası girilmemiş olan öğrenciler ve akademisyenlerde varsayılan olarak atanır.
+		 */ 
 		private const long IDENTITY_NUMBER = 10000000000;
 
+		/**
+		 * Kurs ve Öğrenci listeleri
+		 - Buradaki dinamik tipindeki listeler kursları ve öğrencileri içeriyor. Helpers kısmında Input sınıfında bu verilerin dinamik olarak
+		 - seçenek halinde konsol ekranından alınmasını sağladığım için tipleri dinamik. Uygun kullanım aslında List<veriTipi>.
+		 */ 
 		static List<dynamic> Courses = new List<dynamic> {
 			new Course("Java Programlama"),
 			new Course("C# Programlama")
@@ -28,6 +37,10 @@ namespace Courseman
 				new Student("Emin", 21, 48561842566)
 		};
 
+		/**
+		 * Çalıştırma metodu
+		 - Sınıf açıklamasından`bu tanımlama sayesinde konsol aplikasyonlarında yaşanan hatalı girdilerde uygulamayı dinamik şekilde yeniden başlatabiliyorum.
+		 */
 		public static int Run()
         {
 			Application.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.", true);
@@ -39,10 +52,6 @@ namespace Courseman
 
 			int selectedCourseIndex = Input.ReadOptions(Courses, true);
 
-			/**
-			 * Kurs oluşturma sihirbazı
-			 *
-			 */
 			if (selectedCourseIndex == -1) {
 
 				Application.WriteLine("Kurs oluşturma sihirbazına hoşgeldiniz\nLütfen kurs adını giriniz:", true);
