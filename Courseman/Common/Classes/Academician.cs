@@ -5,6 +5,8 @@ namespace Courseman.Common.Classes
 {
 	public class Academician: IAcademician
 	{
+		public const string DEFAULT_ACADEMICIAN_NAME = "Atanamamış";
+
 		public Academician(string Name)
 		{
 			this.Name = Name;

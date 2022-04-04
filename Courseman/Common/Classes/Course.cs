@@ -35,7 +35,7 @@ namespace Courseman.Common.Classes
         public int MidtermRatio { get; set; }
         public int FinalRatio { get; set; }
 
-        private Academician _academician = null!;
+        private Academician _academician = new Academician(Academician.DEFAULT_ACADEMICIAN_NAME);
         public Academician Academician
         {
             get => _academician;
