@@ -1,5 +1,5 @@
 ﻿using Courseman.Common.Interfaces;
-using System.Reflection;
+using Courseman.Common.Models;
 
 #if DEBUG
 using Courseman.Common.Helpers;
@@ -9,9 +9,6 @@ namespace Courseman.Common.Classes
 {
     public class Course : ICourse
     {
-        public const int MIDTERM_RATIO = 20;
-        public const int FINAL_RATIO = 60;
-
         public Course(string Name, int midtermRatio = Course.MIDTERM_RATIO, int finalRatio = Course.FINAL_RATIO)
         {
             this.Name = Name;
@@ -23,6 +20,14 @@ namespace Courseman.Common.Classes
             // Ön tanımlı elemanlar
             this.Academician = new Academician(Academician.DEFAULT_ACADEMICIAN_NAME);
         }
+
+        public const int MIDTERM_RATIO = 20;
+         
+        public const int FINAL_RATIO = 60;
+
+        public static string[] Fillable { get; set; } = MCourse.Fillable;
+
+        public static Dictionary<string, string> FriendlyProperties { get; set; } = MCourse.FriendlyProperties;
 
         private string _name = null!;
         public string Name
@@ -37,6 +42,7 @@ namespace Courseman.Common.Classes
         }
 
         public int MidtermRatio { get; set; }
+
         public int FinalRatio { get; set; }
 
         private Academician _academician = null!;
