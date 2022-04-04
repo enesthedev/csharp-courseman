@@ -1,4 +1,5 @@
 ﻿using Courseman.Common.Interfaces;
+using System.Reflection;
 
 #if DEBUG
 using Courseman.Common.Helpers;
