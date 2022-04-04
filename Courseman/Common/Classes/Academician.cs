@@ -43,7 +43,7 @@ namespace Courseman.Common.Classes
 			if (!Courses.Contains(course)) {
 				Courses.Add(course);
 
-				if(course.Academician == null)
+				if(course.Academician.Name == Academician.DEFAULT_ACADEMICIAN_NAME)
 					course.AttachAcademician(this);
 			}
             

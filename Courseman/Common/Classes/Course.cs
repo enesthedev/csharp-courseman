@@ -18,6 +18,9 @@ namespace Courseman.Common.Classes
             // Opsiyonel elemanlar
             this.MidtermRatio = midtermRatio;
             this.FinalRatio = finalRatio;
+
+            // Ön tanımlı elemanlar
+            this.Academician = new Academician(Academician.DEFAULT_ACADEMICIAN_NAME);
         }
 
         private string _name = null!;
@@ -35,7 +38,7 @@ namespace Courseman.Common.Classes
         public int MidtermRatio { get; set; }
         public int FinalRatio { get; set; }
 
-        private Academician _academician = new Academician(Academician.DEFAULT_ACADEMICIAN_NAME);
+        private Academician _academician = null!;
         public Academician Academician
         {
             get => _academician;
@@ -84,7 +87,7 @@ namespace Courseman.Common.Classes
 
         public Course AttachAcademician(Academician academician)
         {
-            if (this.Academician == null && academician != null) {
+            if (this.Academician.Name == Academician.DEFAULT_ACADEMICIAN_NAME && academician != null) {
                 this.Academician = academician;
 
                 if (!academician.Courses.Contains(this))
