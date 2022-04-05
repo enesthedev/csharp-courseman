@@ -15,14 +15,14 @@
     <None Remove="Common\Classes\" />
     <None Remove="Common\Interfaces\" />
     <None Remove="Common\Helpers\" />
-    <None Remove="Common\Models\" />
+    <None Remove="Common\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Common\Classes\" />
+    <Folder Include="Common\Entitys\" />
     <Folder Include="Common\Interfaces\" />
     <Folder Include="Common\Helpers\" />
-    <Folder Include="Common\Models\" />
+    <Folder Include="Common\Enums\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
