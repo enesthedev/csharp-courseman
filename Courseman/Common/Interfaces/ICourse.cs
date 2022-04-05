@@ -1,4 +1,4 @@
-﻿using Courseman.Common.Classes;
+﻿using Courseman.Common.Entitys;
 
 namespace Courseman.Common.Interfaces
 {

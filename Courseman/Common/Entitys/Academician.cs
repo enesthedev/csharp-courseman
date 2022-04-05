@@ -1,17 +1,10 @@
 ﻿using System;
 using Courseman.Common.Interfaces;
 
-namespace Courseman.Common.Classes
+namespace Courseman.Common.Entitys
 {
 	public class Academician: IAcademician
 	{
-		public const string DEFAULT_ACADEMICIAN_NAME = "Atanamamış";
-
-		public Academician(string Name)
-		{
-			this.Name = Name;
-		}
-
 		private string _name = null!;
 		public string Name {
 			get => _name;
@@ -23,7 +16,7 @@ namespace Courseman.Common.Classes
             }
         }
 
-		private long _identityNumber = 00000000000;
+		private long _identityNumber;
 		public long IdentityNumber {
 			get => _identityNumber;
 			set {
@@ -34,19 +27,27 @@ namespace Courseman.Common.Classes
             }
         }
 
-		public int Age { get; set; } = 0;
+		public int Age { get; set; }
 
-		public List<Course> Courses { get; set; } = new List<Course>();
+		public List<Course> Courses { get; set; }
+
+		public Academician(string name = "İsimsiz Eğitmen", int age = 26, long identityNumber = 10000000000)
+        {
+			this.Name = name;
+			this.Age = age;
+			this.IdentityNumber = identityNumber;
+
+			this.Courses = new List<Course>();
+        }
 
 		public Academician AddCourse(Course course)
         {
-			if (!Courses.Contains(course)) {
-				Courses.Add(course);
+			if (Courses.Contains(course))
+				return this;
 
-				if(course.Academician.Name == Academician.DEFAULT_ACADEMICIAN_NAME)
-					course.AttachAcademician(this);
-			}
-            
+			if (!course.Academician.Name.Equals(Name))
+				course.AttachAcademician(this);
+
 			return this;
         }
 
