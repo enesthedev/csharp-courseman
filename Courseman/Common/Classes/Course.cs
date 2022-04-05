@@ -9,7 +9,7 @@ namespace Courseman.Common.Classes
 {
     public class Course : ICourse
     {
-        public Course(string Name, int midtermRatio = Course.MIDTERM_RATIO, int finalRatio = Course.FINAL_RATIO)
+        public Course(string Name = "default", int midtermRatio = Course.MIDTERM_RATIO, int finalRatio = Course.FINAL_RATIO)
         {
             this.Name = Name;
 
@@ -19,15 +19,17 @@ namespace Courseman.Common.Classes
 
             // Ön tanımlı elemanlar
             this.Academician = new Academician(Academician.DEFAULT_ACADEMICIAN_NAME);
+            this.Fillable = MCourse.Fillable;
+            this.FriendlyProperties = MCourse.FriendlyProperties;
         }
 
         public const int MIDTERM_RATIO = 20;
          
         public const int FINAL_RATIO = 60;
 
-        public static string[] Fillable { get; set; } = MCourse.Fillable;
+        public string[] Fillable { get; set; }
 
-        public static Dictionary<string, string> FriendlyProperties { get; set; } = MCourse.FriendlyProperties;
+        public Dictionary<string, string> FriendlyProperties { get; set; }
 
         private string _name = null!;
         public string Name
