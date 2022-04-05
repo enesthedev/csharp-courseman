@@ -1,5 +1,6 @@
 ﻿using System;
 using Courseman.Common.Interfaces;
+using Courseman.Common.Models;
 
 namespace Courseman.Common.Classes
 {
@@ -7,12 +8,20 @@ namespace Courseman.Common.Classes
 	{
         public const int STUDENT_AGE = 21;
 
-		public Student(string Name, int Age, long IdentityNumber)
+		public Student(string Name = "default", int Age = STUDENT_AGE, long IdentityNumber = 10000000000)
 		{
             this.Name = Name;
             this.Age = Age;
             this.IdentityNumber = IdentityNumber;
+
+            // Ön tanımlı elemanlar
+            this.Fillable = MStudent.Fillable;
+            this.FriendlyProperties = MStudent.FriendlyProperties;
 		}
+
+        public string[] Fillable { get; set; }
+
+        public Dictionary<string, string> FriendlyProperties { get; set; }
 
         private string _name = null!;
         public string Name {
@@ -25,6 +34,8 @@ namespace Courseman.Common.Classes
             }
         }
 
+        public int Age { get; set; }
+
         private long _identityNumber;
         public long IdentityNumber {
             get => _identityNumber;
@@ -35,8 +46,6 @@ namespace Courseman.Common.Classes
                 _identityNumber = value;
             }
         }
-
-        public int Age { get; set; } = STUDENT_AGE;
 
         public List<Course> Courses {
             get;
