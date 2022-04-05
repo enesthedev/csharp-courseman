@@ -10,9 +10,9 @@ namespace Courseman.Common.Models
 		};
 
 		public static Dictionary<string, string> FriendlyProperties = new Dictionary<string, string> {
-			{ "Name", "kursun ismi" },
-			{ "MidtermRatio", "vize notu oranları" },
-			{ "FinalRatio", "final notu oranları" }
+			{ "Name", "kursun isim" },
+			{ "MidtermRatio", "vize notu oranı" },
+			{ "FinalRatio", "final notu oranı" }
 		};
 	}
 }
