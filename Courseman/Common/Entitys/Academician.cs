@@ -13,8 +13,8 @@ namespace Courseman.Common.Entitys
 					throw new ArgumentNullException(nameof(value));
 
 				_name = value;
-            }
-        }
+			}
+		}
 
 		private long _identityNumber;
 		public long IdentityNumber {
@@ -24,12 +24,24 @@ namespace Courseman.Common.Entitys
 					throw new InvalidDataException($"{nameof(value)} cant bigger/lesser then length of 11");
 
 				_identityNumber = value;
-            }
-        }
+			}
+		}
 
 		public int Age { get; set; }
 
 		public List<Course> Courses { get; set; }
+
+		public string[] Fillable = {
+			"Name",
+			"Age",
+			"IdentityNumber",
+		};
+
+		public Dictionary<string, string> FriendlyPropertyNames = new Dictionary<string, string> {
+			{ "Name", "akademisyen isim" },
+			{ "Age", "akademisyen yaş" },
+			{ "IdentityNumber", "kimik numarası" }
+		};
 
 		public Academician(string name = "İsimsiz Eğitmen", int age = 26, long identityNumber = 10000000000)
         {
