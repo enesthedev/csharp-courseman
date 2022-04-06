@@ -27,8 +27,8 @@ namespace Courseman.Common.Entitys
             }
         }
 
-        public int MidtermRatio { get; set; }
-        public int FinalRatio { get; set; }
+        public double MidtermRatio { get; set; }
+        public double FinalRatio { get; set; }
 
         public List<Student> Students { get; set; }
 
@@ -44,7 +44,7 @@ namespace Courseman.Common.Entitys
             { "FinalRatio", "final notu oranı" }
         };
 
-        public Course(string name = "İsimsiz Kurs", int midtermRatio = (int)Ratios.Midterm, int finalRatio = (int)Ratios.Final)
+        public Course(string name = "İsimsiz Kurs", double midtermRatio = (double)Ratios.Midterm/100, double finalRatio = (double)Ratios.Final/100)
         {
             this.Name = name;
             this.MidtermRatio = midtermRatio;
@@ -84,6 +84,21 @@ namespace Courseman.Common.Entitys
                 academician.AddCourse(this);
 
             return this;
+        }
+
+        public double CalculatePoint(double point, int type)
+        {
+            double ratio = 0.0;
+            switch(type) {
+                case 0:
+                    ratio = MidtermRatio;
+                    break;
+                case 1:
+                    ratio = FinalRatio;
+                    break;
+            }
+
+            return (double)(point * (ratio > 1 ? (ratio / 100) : ratio));
         }
     }
 }
