@@ -47,8 +47,8 @@ namespace Courseman.Common.Entitys
         public Course(string name = "İsimsiz Kurs", int midtermRatio = (int)Ratios.Midterm, int finalRatio = (int)Ratios.Final)
         {
             this.Name = name;
-            this.MidtermRatio = MidtermRatio;
-            this.FinalRatio = FinalRatio;
+            this.MidtermRatio = midtermRatio;
+            this.FinalRatio = finalRatio;
 
             this.Students = new List<Student>();
             this.Academician = new Academician();
