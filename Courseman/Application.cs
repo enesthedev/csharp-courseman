@@ -1,4 +1,5 @@
-﻿using Courseman.Common.Classes;
+﻿using System.Collections.Generic;
+using Courseman.Common.Entitys;
 using Courseman.Common.Helpers;
 
 namespace Courseman
@@ -15,12 +16,6 @@ namespace Courseman
 		 * Aynı zamanda bu tanımlama sayesinde konsol aplikasyonlarında yaşanan hatalı girdilerde uygulamayı dinamik şekilde yeniden başlatabiliyorum.
 		 * Yeniden başlatma yanlış algılanmasın. Aynı process içerisinde tekrardan tanımlamaları yapıyorum.
 		 */
-
-		/**
-		 * Kimlik numarası
-		 - Bu değer kimlik numarası girilmemiş olan öğrenciler ve akademisyenlerde varsayılan olarak atanır.
-		 */ 
-		private const long IDENTITY_NUMBER = 10000000000;
 
 		/**
 		 * Kurs ve Öğrenci listeleri
@@ -63,9 +58,8 @@ namespace Courseman
 				}
             }
 
-			for (int i = 0; i < Courses.ToArray().Length; i++) {
+			for (int i = 0; i < Courses.ToArray().Length; i++)
 				Application.WriteLine("{0}: {1} (Akademisyen: {2})", false, i, Courses.ElementAt(i).Name, Courses.ElementAt(i).Academician.Name);
-			}
 
 			int selectedCourseIndex = Input.ReadOptions(Courses, true);
 
@@ -74,6 +68,8 @@ namespace Courseman
 
 				if (!Wizard.Mount(
 					course,
+					new Course(), // Varsayılan değerler için yeni bir boş sınıf gönderiyorum
+					true,
 					"Kurs oluşturma sihirbazına hoşgeldiniz",
 					"(Sihirbazdan çıkmak için -1 yazabilirsiniz"
 				)) return Run();
@@ -88,11 +84,43 @@ namespace Courseman
 		
 			Course selectedCourse = Courses.ElementAt(selectedCourseIndex);
 
+			if (selectedCourse.Academician.Name == new Course().Academician.Name) {
+				Application.WriteLine("{0} kursu için lütfen alttaki akademisyenlerden birini seçin:\nYeni bir akademisyen oluşturmak istiyorsanız -1 yazabilirsiniz.", true, selectedCourse.Name);
+
+				for (int i = 0; i < Academicians.ToArray().Length; i++)
+					Application.WriteLine("{0}: {1}", false, i, Academicians.ElementAt(i).Name);
+
+				int selectedAcademicianIndex = Input.ReadOptions(Academicians, true);
+
+				if (selectedAcademicianIndex == -1) {
+					Academician academician = new Academician();
+
+					if (!Wizard.Mount(
+						academician,
+						new Academician(),
+						true,
+						"Akademisyen oluşturma sihirbazına hoşgeldiniz",
+						"(Sihirbazdan çıkmak için -1 yazabilirsiniz)"
+					)) return Run();
+
+					Academicians.Add(academician);
+
+					Application.WriteLine("{0} adlı akademisyen başarıyla eklendi.", true, academician.Name);
+					Thread.Sleep(1000);
+
+					return Run();
+				}
+
+				selectedCourse.AttachAcademician(Academicians.ElementAt(selectedAcademicianIndex));
+			}
+
+			Application.WriteLine("{0} kursu için {1} adlı akademisyenle devam ediliyor...", true, selectedCourse.Name, selectedCourse.Academician.Name);
+			Thread.Sleep(500);
+
 			Application.WriteLine("{0} kursu için lütfen alttaki öğrencilerden birini seçiniz:\nYeni bir öğrenci oluşturmak istiyorsanız -1 yazabilirsiniz.", true, selectedCourse.Name);
 
-			for (int i = 0; i < Students.ToArray().Length; i++) {
+			for (int i = 0; i < Students.ToArray().Length; i++)
 				Application.WriteLine("{0}: {1}", false, i, Students.ElementAt(i).Name);
-			}
 
 			int selectedStudentIndex = Input.ReadOptions(Students, true);
 
@@ -101,6 +129,8 @@ namespace Courseman
 
 				if (!Wizard.Mount(
 					student,
+					new Student(),
+					true,
 					"Öğrenci oluşturma sihirbazına hoşgeldiniz",
 					"(Sihirbazdan çıkmak için -1 yazabilirsiniz)"
 				)) return Run();
@@ -114,7 +144,32 @@ namespace Courseman
 			}
 
 			Student selectedStudent = Students.ElementAt(selectedStudentIndex);
-			
+
+			Application.WriteLine(
+				"{0} adlı eğitmenin vermiş olduğu {1} kursundan aldığınız vize notunu giriniz:",
+				true,
+				selectedCourse.Academician.Name,
+				selectedCourse.Name
+			);
+			double midtermValue = Input.ReadDouble(0, 100);
+
+			Application.WriteLine(
+				"{0} adlı eğitmenin vermiş olduğu {1} kursundan aldığınız final notunu giriniz:",
+				true,
+				selectedCourse.Academician.Name,
+				selectedCourse.Name
+			);
+			double finalValue = Input.ReadDouble(0, 100);
+
+			double averagePoint = selectedCourse.CalculatePoint(midtermValue, 0) + selectedCourse.CalculatePoint(finalValue, 1);
+			Application.WriteLine(
+				"{0} adlı kurstan {1:0.00} notu ile {2}.",
+				true,
+				selectedCourse.Name,
+				averagePoint,
+				averagePoint >= 50 ? "geçtiniz" : "kaldınız"
+			);
+
 			return 1;
 		}
 
