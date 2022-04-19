@@ -1,9 +1,8 @@
-﻿using System;
-using Courseman.Common.Interfaces;
+﻿using Courseman.Common.Interfaces;
 
 namespace Courseman.Common.Entitys
 {
-	public class Student: IStudent
+	public class Student: IStudent, IWizardable
 	{
         private string _name = null!;
         public string Name {
@@ -44,27 +43,23 @@ namespace Courseman.Common.Entitys
             { "IdentityNumber", "kimik numarası" }
         };
 
-        public Student(string Name = "İsimsiz Öğrenci", int Age = 21, long IdentityNumber = 10000000000)
+        public Student(string name = "İsimsiz Öğrenci", int age = 21, long identityNumber = 10000000000)
         {
-            this.Name = Name;
-            this.Age = Age;
-            this.IdentityNumber = IdentityNumber;
+            this.Name = name;
+            this.Age = age;
+            this.IdentityNumber = identityNumber;
 
             this.Courses = new List<Course>();
         }
 
         public Student AddCourse(Course course)
         {
-            if (course == null)
-                return this;
-
             if (!Courses.Contains(course))
                 Courses.Add(course);
 
             if (!course.Students.Contains(this))
                 course.AddStudent(this);
-
-
+            
             return this;
         }
     }

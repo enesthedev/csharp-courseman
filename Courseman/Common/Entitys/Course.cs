@@ -3,7 +3,7 @@ using Courseman.Common.Enums;
 
 namespace Courseman.Common.Entitys
 {
-    public class Course : ICourse
+    public class Course : ICourse, IWizardable
     {
         private string _name = null!;
         public string Name {
@@ -72,9 +72,6 @@ namespace Courseman.Common.Entitys
 
         public Course AttachAcademician(Academician academician)
         {
-            if (academician == null)
-                return this;
-
             if (Academician.Name == academician.Name)
                 return this;
 
@@ -98,7 +95,7 @@ namespace Courseman.Common.Entitys
                     break;
             }
 
-            return (double)(point * (ratio > 1 ? (ratio / 100) : ratio));
+            return (point * (ratio > 1 ? (ratio / 100) : ratio));
         }
     }
 }

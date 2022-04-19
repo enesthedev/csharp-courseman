@@ -1,9 +1,8 @@
-﻿using System;
-using Courseman.Common.Interfaces;
+﻿using Courseman.Common.Interfaces;
 
 namespace Courseman.Common.Entitys
 {
-	public class Academician: IAcademician
+	public class Academician: IAcademician, IWizardable
 	{
 		private string _name = null!;
 		public string Name {
