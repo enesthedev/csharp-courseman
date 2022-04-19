@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Courseman.Common.Entitys;
+﻿using Courseman.Common.Entitys;
 using Courseman.Common.Helpers;
+using Courseman.Common.Interfaces;
 
 namespace Courseman
 {
@@ -16,23 +16,18 @@ namespace Courseman
 		 * Aynı zamanda bu tanımlama sayesinde konsol aplikasyonlarında yaşanan hatalı girdilerde uygulamayı dinamik şekilde yeniden başlatabiliyorum.
 		 * Yeniden başlatma yanlış algılanmasın. Aynı process içerisinde tekrardan tanımlamaları yapıyorum.
 		 */
-
-		/**
-		 * Kurs ve Öğrenci listeleri
-		 - Buradaki dinamik tipindeki listeler kursları ve öğrencileri içeriyor. Helpers kısmında Input sınıfında bu verilerin dinamik olarak
-		 - seçenek halinde konsol ekranından alınmasını sağladığım için tipleri dinamik. Uygun kullanım aslında List<veriTipi>.
-		 */ 
-		static List<dynamic> Courses = new List<dynamic> {
+		
+		static List<IWizardable> Courses = new List<IWizardable> {
 			new Course("Java Programlama"),
 			new Course("C# Programlama")
 		};
 
-		static List<dynamic> Students = new List<dynamic>() {
+		static List<IWizardable> Students = new List<IWizardable>() {
 			new Student("Enes", 22, 63673031350),
 			new Student("Emin", 21, 48561842566)
 		};
 
-		static List<dynamic> Academicians = new List<dynamic>() {
+		static List<IWizardable> Academicians = new List<IWizardable>() {
 			new Academician("Tugba"),
 			new Academician("Ömer"),
 		};
@@ -45,21 +40,20 @@ namespace Courseman
         {
 			Application.WriteLine("Ortalama kurs puanı hesaplama programına hoşgeldiniz.", true);
 			Application.WriteLine("Lütfen alttaki kurslardan puanını hesaplamak istediğiniz kursu seçiniz:\nYeni bir kurs oluşturmak isterseniz -1 yazabilirsiniz.");
-
-			/**
-			 * Akademisyenleri Kurslarla eşleştirme
-			 - Bu döngüde built-in girilmiş akademisyenleri kurslarla eşleştiriyorum, kriter olarak akademisyenin hiç bir kursa atanmamış sahip olmaması gerekiyor.
-			 - aplikasyon yeniden başladığında hata yaşanmasını bu şekilde önlemiş oluyorum.
-			 */
+			
 			for (int i = 0; i < Academicians.ToArray().Length; i++) {
-				Academician academician = Academicians.ElementAt(i);
+				Academician academician = (Academician)Academicians.ElementAt(i);
 				if (academician.Courses.ToArray().Length == 0) {
-					Academicians.ElementAt(i).AddCourse(Courses.ElementAt(i));
+					academician.AddCourse((Course) Courses.ElementAt(i));
 				}
             }
 
 			for (int i = 0; i < Courses.ToArray().Length; i++)
-				Application.WriteLine("{0}: {1} (Akademisyen: {2})", false, i, Courses.ElementAt(i).Name, Courses.ElementAt(i).Academician.Name);
+			{
+				Course currentCourse = (Course)Courses.ElementAt((i));
+				Application.WriteLine("{0}: {1} (Akademisyen: {2})", false, i, currentCourse.Name,
+					currentCourse.Academician.Name);
+			}
 
 			int selectedCourseIndex = Input.ReadOptions(Courses, true);
 
@@ -82,13 +76,16 @@ namespace Courseman
 				return Run();
 			}
 		
-			Course selectedCourse = Courses.ElementAt(selectedCourseIndex);
+			Course selectedCourse = (Course)Courses.ElementAt(selectedCourseIndex);
 
 			if (selectedCourse.Academician.Name == new Course().Academician.Name) {
 				Application.WriteLine("{0} kursu için lütfen alttaki akademisyenlerden birini seçin:\nYeni bir akademisyen oluşturmak istiyorsanız -1 yazabilirsiniz.", true, selectedCourse.Name);
 
 				for (int i = 0; i < Academicians.ToArray().Length; i++)
-					Application.WriteLine("{0}: {1}", false, i, Academicians.ElementAt(i).Name);
+				{
+					Academician currentAcademician = (Academician)Academicians.ElementAt(i);
+					Application.WriteLine("{0}: {1}", false, i, currentAcademician.Name);
+				}
 
 				int selectedAcademicianIndex = Input.ReadOptions(Academicians, true);
 
@@ -111,7 +108,7 @@ namespace Courseman
 					return Run();
 				}
 
-				selectedCourse.AttachAcademician(Academicians.ElementAt(selectedAcademicianIndex));
+				selectedCourse.AttachAcademician((Academician)Academicians.ElementAt(selectedAcademicianIndex));
 			}
 
 			Application.WriteLine("{0} kursu için {1} adlı akademisyenle devam ediliyor...", true, selectedCourse.Name, selectedCourse.Academician.Name);
@@ -120,7 +117,10 @@ namespace Courseman
 			Application.WriteLine("{0} kursu için lütfen alttaki öğrencilerden birini seçiniz:\nYeni bir öğrenci oluşturmak istiyorsanız -1 yazabilirsiniz.", true, selectedCourse.Name);
 
 			for (int i = 0; i < Students.ToArray().Length; i++)
-				Application.WriteLine("{0}: {1}", false, i, Students.ElementAt(i).Name);
+			{
+				Student currentStudent = (Student)Students.ElementAt(i);
+				Application.WriteLine("{0}: {1}", false, i, currentStudent.Name);
+			}
 
 			int selectedStudentIndex = Input.ReadOptions(Students, true);
 
@@ -142,8 +142,6 @@ namespace Courseman
 
 				return Run();
 			}
-
-			Student selectedStudent = Students.ElementAt(selectedStudentIndex);
 
 			Application.WriteLine(
 				"{0} adlı eğitmenin vermiş olduğu {1} kursundan aldığınız vize notunu giriniz:",
