@@ -1,8 +1,10 @@
-﻿namespace Courseman.Common.Helpers
+﻿using Courseman.Common.Interfaces;
+
+namespace Courseman.Common.Helpers
 {
 	public class Input
 	{
-		public static int ReadOptions(List<dynamic> listOfClasses, bool minusOneEnabled = false)
+		public static int ReadOptions(List<IWizardable> listOfClasses, bool minusOneEnabled = false)
 		{
 			try {
 				int selectedOption = Convert.ToInt32(Console.ReadLine());
