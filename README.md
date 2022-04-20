@@ -3,7 +3,7 @@
 	<sup>Last Updated At: 20.04.2022</sup>
     <hr/>
     <div>
-        <small>This console application based on .NET 6 and includes Entitys, Domain pattern, Attribute and Multiple Interface usage from Microsoft dotnet <a href="https://docs.microsoft.com/tr-tr/dotnet/csharp/">docs"</a>.</small>
+        <small>This console application based on .NET 6 and includes Entitys, Domain pattern, Attribute and Multiple Interface usage from Microsoft dotnet <a href="https://docs.microsoft.com/tr-tr/dotnet/csharp/">docs</a>.</small>
     </div>
 </div>
 
