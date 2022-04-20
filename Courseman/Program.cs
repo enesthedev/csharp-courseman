@@ -18,4 +18,6 @@
  * Metodların sınırsız argüman alabilmesi için tanımlamam gereken tip hakkında bilgi https://stackoverflow.com/questions/2435757/creating-methods-with-infinite-parameters
  */
 
-Courseman.Application.Run();
+using Courseman;
+
+Application.Run();

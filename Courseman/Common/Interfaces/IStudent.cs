@@ -1,12 +1,9 @@
-﻿using System;
-using Courseman.Common.Entitys;
+﻿using Courseman.Common.Entitys;
 
-namespace Courseman.Common.Interfaces
+namespace Courseman.Common.Interfaces;
+
+public interface IStudent : IPerson
 {
-	public interface IStudent : IPerson
-	{
-		public List<Course> Courses { get; set; }
-		public Student AddCourse(Course course);
-	}
+    public List<Course> Courses { get; set; }
+    public Student AddCourse(Course course);
 }
-

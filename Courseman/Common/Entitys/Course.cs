@@ -1,101 +1,100 @@
-﻿using Courseman.Common.Interfaces;
+﻿using Courseman.Common.Attributes;
 using Courseman.Common.Enums;
+using Courseman.Common.Interfaces;
 
-namespace Courseman.Common.Entitys
+namespace Courseman.Common.Entitys;
+
+public class Course : ICourse, IWizardable
 {
-    public class Course : ICourse, IWizardable
+    private Academician _academician = null!;
+    private string _name = null!;
+
+    public Course(string name = "İsimsiz Kurs", double midtermRatio = (double)Ratios.Midterm / 100,
+        double finalRatio = (double)Ratios.Final / 100)
     {
-        private string _name = null!;
-        public string Name {
-            get => _name;
-            set {
-                if (string.IsNullOrEmpty(value))
-                    throw new ArgumentNullException(nameof(value));
+        Name = name;
+        MidtermRatio = midtermRatio;
+        FinalRatio = finalRatio;
 
-                _name = value;
-            }
-        }
+        Students = new List<Student>();
+        Academician = new Academician();
+    }
 
-        private Academician _academician = null!;
-        public Academician Academician {
-            get => _academician;
-            set {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                _academician = value;
-            }
-        }
-
-        public double MidtermRatio { get; set; }
-        public double FinalRatio { get; set; }
-
-        public List<Student> Students { get; set; }
-
-        public string[] Fillable = {
-            "Name",
-            "MidtermRatio",
-            "FinalRatio",
-        };
-
-        public Dictionary<string, string> FriendlyPropertyNames = new Dictionary<string, string> {
-            { "Name", "kursun isim" },
-            { "MidtermRatio", "vize notu oranı" },
-            { "FinalRatio", "final notu oranı" }
-        };
-
-        public Course(string name = "İsimsiz Kurs", double midtermRatio = (double)Ratios.Midterm/100, double finalRatio = (double)Ratios.Final/100)
+    [Fillable(FriendlyName = "kursun isim")]
+    public string Name
+    {
+        get => _name;
+        set
         {
-            this.Name = name;
-            this.MidtermRatio = midtermRatio;
-            this.FinalRatio = finalRatio;
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentNullException(nameof(value));
 
-            this.Students = new List<Student>();
-            this.Academician = new Academician();
+            _name = value;
         }
+    }
 
-        public Course AddStudent(Student student)
+    public Academician Academician
+    {
+        get => _academician;
+        set
         {
-            if (!Students.Contains(student))
-                Students.Add(student);
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
 
+            _academician = value;
+        }
+    }
+
+    [Fillable(FriendlyName = "vize notu oranı")]
+    public double MidtermRatio { get; set; }
+
+    [Fillable(FriendlyName = "final notu oranı")]
+    public double FinalRatio { get; set; }
+
+    public List<Student> Students { get; set; }
+
+    public Course AddStudent(Student student)
+    {
+        if (!Students.Contains(student))
+            Students.Add(student);
+
+        return this;
+    }
+
+    public Course RemoveStudent(Student student)
+    {
+        if (Students.Contains(student))
+            Students.Remove(student);
+
+        return this;
+    }
+
+    public Course AttachAcademician(Academician academician)
+    {
+        if (Academician.Name == academician.Name)
             return this;
-        }
 
-        public Course RemoveStudent(Student student)
+        Academician = academician;
+
+        if (!academician.Courses.Contains(this))
+            academician.AddCourse(this);
+
+        return this;
+    }
+
+    public double CalculatePoint(double point, int type)
+    {
+        var ratio = 0.0;
+        switch (type)
         {
-            if (Students.Contains(student))
-                Students.Remove(student);
-
-            return this;
+            case 0:
+                ratio = MidtermRatio;
+                break;
+            case 1:
+                ratio = FinalRatio;
+                break;
         }
 
-        public Course AttachAcademician(Academician academician)
-        {
-            if (Academician.Name == academician.Name)
-                return this;
-
-            Academician = academician;
-
-            if (!academician.Courses.Contains(this))
-                academician.AddCourse(this);
-
-            return this;
-        }
-
-        public double CalculatePoint(double point, int type)
-        {
-            double ratio = 0.0;
-            switch(type) {
-                case 0:
-                    ratio = MidtermRatio;
-                    break;
-                case 1:
-                    ratio = FinalRatio;
-                    break;
-            }
-
-            return (point * (ratio > 1 ? (ratio / 100) : ratio));
-        }
+        return point * (ratio > 1 ? ratio / 100 : ratio);
     }
 }

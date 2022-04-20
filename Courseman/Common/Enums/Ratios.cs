@@ -1,10 +1,7 @@
-﻿using System;
-namespace Courseman.Common.Enums
-{
-	public enum Ratios: int
-	{
-		Midterm = 40,
-		Final = 60
-	}
-}
+﻿namespace Courseman.Common.Enums;
 
+public enum Ratios
+{
+    Midterm = 40,
+    Final = 60
+}
